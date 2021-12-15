@@ -7,20 +7,34 @@ import Reto4Ciclo4.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ *
+ * @author Angie
+ */
 @Service
 public class UserService {
+    /**
+     * Variable que representa el servicio de Usuario
+     */
     @Autowired
     private UserRepository userRepository;
-
+    /**
+     * Obtener Lista de todos los usuarios
+     */
     public List<User> getAll(){
         return userRepository.getAll();
     }
-
+    /**
+     * Obtener usuarios por su id
+     * @param id
+     * @return
+     */
     public Optional<User> getUser(int id){
         return userRepository.getUser(id);
     }
-
+    /**
+     * Mwetodo para guardar nuevo usuario
+     */
     public User save(User user){
         if (user.getId()== null){
             return user;
@@ -37,7 +51,9 @@ public class UserService {
             }
         }
     }
-
+    /**
+     * Mwetodo para actualizar un usuario
+     */
     public User update(User user) {
         if (user.getId() != null) {
             Optional<User> dbUser = userRepository.getUser(user.getId());
@@ -80,7 +96,9 @@ public class UserService {
         }
         return user;
     }
-
+    /**
+     * Mwetodo para revisar si un email existe
+     */
     public boolean emailExists(String email) {
         return userRepository.emailExists(email);
     }
@@ -92,7 +110,9 @@ public class UserService {
         }).orElse(false);
         return userBoolean;
     }
-
+    /**
+     * Metodo para autenticar un usuario
+     */
     public User authenticateUser(String email, String password){
         Optional<User>user=userRepository.authenticateUser(email, password);
         if (user.isEmpty()){
